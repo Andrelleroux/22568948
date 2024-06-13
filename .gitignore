@@ -1,3 +1,6 @@
+# Excel Data file
+*.csv
+
 # Object file
 *.o
 
