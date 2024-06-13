@@ -1,0 +1,18 @@
+---
+output: html
+  md_document:
+    variant: markdown_github
+---
+
+The purpose of this README markdown file is to explain my thinking during the coding aspect of the final exam for Data Science Methods for Economics and Finance in June 2024.
+
+
+```{r}
+
+rm(list = ls()) # Clean your environment:
+gc() # garbage collection - It can be useful to call gc after a large object has been removed, as this may prompt R to return memory to the operating system.
+library(tidyverse)
+list.files('code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.list() %>% walk(~source(.))
+```
+
+
