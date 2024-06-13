@@ -1,8 +1,6 @@
-# Excel Data file
+#Excel Data file
 *.csv
 
-# Object file
-*.o
-
-# Ada Library Information
-*.ali
+#Other Data Types
+*.rds
+*.txt
