@@ -3,7 +3,7 @@
     "path": "~/Masters_2024_stuff/Data_Science/22568948/22568948/README.rmd",
     "project_path": "README.rmd",
     "type": "r_markdown",
-    "hash": "1261932912",
+    "hash": "2982741344",
     "contents": "",
     "dirty": false,
     "created": 1718687154938.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "6,1",
-        "scrollLine": "3"
+        "cursorPosition": "1,7",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1718687462,
+    "lastKnownWriteTime": 1718687670,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1718687462232,
+    "last_content_update": 1718687670564,
     "read_only": false,
     "read_only_alternatives": []
 }
