@@ -1,0 +1,26 @@
+India_Comparison_Plot <- function(data_df){
+
+    GDP <- read_rds(glue::glue("data/GDP.rds")) %>% select(Code, Population, `GDP per Capita`)
+
+    plot_df <- data_df %>% filter(Season == "Summer") %>% group_by(Year, Event, Sport, Medal) %>%
+        count(Country) %>% mutate(Medal_Unique = 1) %>% group_by(Country) %>%
+        summarise(Gold = sum(Medal == "Gold"),
+                  Silver = sum(Medal == "Silver"),
+                  Bronze = sum(Medal == "Bronze")) %>%
+        mutate(Medal_Tally = 3 * Gold + 2 * Silver + Bronze) %>% left_join(GDP, by = c("Country" = "Code")) %>%
+        filter(!is.na(`GDP per Capita`)) %>% arrange(desc(`GDP per Capita`)) %>% mutate(Rank = row_number())
+
+    india_rank <- plot_df %>% filter(Country == "IND") %>% pull(Rank)
+
+    Filtered_plot <- plot_df %>% filter(Rank >= (india_rank - 10) & Rank <= (india_rank + 10)) %>%
+        ggplot(aes(x = reorder(Country, `GDP per Capita`), y = Medal_Tally)) + geom_segment(aes(x = Country, xend = Country,
+                                                                                                y = 0, yend = Medal_Tally)) +
+        geom_point(aes(size = sqrt(Population)), color = "blue", alpha = 0.6)+
+        coord_flip()+
+        theme_bw()+
+        theme(legend.position = "none") +
+        labs(title = "Medal Tally For Countries With Similar GDP per Capita to India", x = "Medal Score",
+             y = "Countries Ranked by GDP per Capita", caption = "Note: Points are scaled according to the square root of the population.")
+
+    Filtered_plot
+}

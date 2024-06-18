@@ -1,0 +1,15 @@
+Create_Map <- function(data){
+
+    points <- st_point_on_surface(st_geometry(data))
+
+    data$lon <- st_coordinates(points)[,1]
+    data$lat <- st_coordinates(points)[,2]
+
+    plot1 <- data %>% ggplot() +
+        geom_sf(aes(fill = Ratio_Commitment)) +
+        scale_fill_gradientn(colors = c("blue", "gold"), na.value = "grey60") +
+        labs(title = "Contribution to Ukrainian Aid", x = "Latitude", y = "Longitude",
+             fill = "Percentage of GDP Committed") + theme_bw() +
+        coord_sf(xlim = c(-23, 50), ylim = c(32, 75))
+
+}

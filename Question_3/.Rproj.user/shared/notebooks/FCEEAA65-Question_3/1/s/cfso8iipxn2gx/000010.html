@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+<script src="lib/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="lib/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="lib/kePrint-0.0.1/kePrint.js"></script>
+<link href="lib/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+</head>
+<body>
+<table style="NAborder-bottom: 0;">
+<caption>Difference Between Promises and Results</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Country </th>
+   <th style="text-align:right;"> Total_Commitments </th>
+   <th style="text-align:right;"> Total_Individual_Allocations </th>
+   <th style="text-align:right;"> Total_Allocations </th>
+   <th style="text-align:right;"> GDP in 2021($ billion) </th>
+   <th style="text-align:right;"> Difference </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> United States </td>
+   <td style="text-align:right;"> 75.4024265 </td>
+   <td style="text-align:right;"> 0.0022839 </td>
+   <td style="text-align:right;"> 0.0022839 </td>
+   <td style="text-align:right;"> 23315.08056 </td>
+   <td style="text-align:right;"> 75.4001426 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Germany </td>
+   <td style="text-align:right;"> 43.5377838 </td>
+   <td style="text-align:right;"> 0.1432366 </td>
+   <td style="text-align:right;"> 0.1432366 </td>
+   <td style="text-align:right;"> 4259.93491 </td>
+   <td style="text-align:right;"> 43.3945472 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Denmark </td>
+   <td style="text-align:right;"> 11.2931999 </td>
+   <td style="text-align:right;"> 0.5772717 </td>
+   <td style="text-align:right;"> 1.1340074 </td>
+   <td style="text-align:right;"> 398.30327 </td>
+   <td style="text-align:right;"> 10.1591925 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Netherlands </td>
+   <td style="text-align:right;"> 10.5792886 </td>
+   <td style="text-align:right;"> 0.0505598 </td>
+   <td style="text-align:right;"> 1.2228751 </td>
+   <td style="text-align:right;"> 1012.84676 </td>
+   <td style="text-align:right;"> 9.3564135 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Japan </td>
+   <td style="text-align:right;"> 8.3630170 </td>
+   <td style="text-align:right;"> 0.4556251 </td>
+   <td style="text-align:right;"> 0.5488147 </td>
+   <td style="text-align:right;"> 4940.87778 </td>
+   <td style="text-align:right;"> 7.8142023 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Canada </td>
+   <td style="text-align:right;"> 8.2810077 </td>
+   <td style="text-align:right;"> 0.2903494 </td>
+   <td style="text-align:right;"> 0.7764724 </td>
+   <td style="text-align:right;"> 1988.33633 </td>
+   <td style="text-align:right;"> 7.5045353 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> France </td>
+   <td style="text-align:right;"> 23.1859875 </td>
+   <td style="text-align:right;"> 15.5235342 </td>
+   <td style="text-align:right;"> 15.8355272 </td>
+   <td style="text-align:right;"> 2957.87976 </td>
+   <td style="text-align:right;"> 7.3504603 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Poland </td>
+   <td style="text-align:right;"> 7.9081260 </td>
+   <td style="text-align:right;"> 0.0800385 </td>
+   <td style="text-align:right;"> 0.5728865 </td>
+   <td style="text-align:right;"> 679.44483 </td>
+   <td style="text-align:right;"> 7.3352395 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Italy </td>
+   <td style="text-align:right;"> 12.9910980 </td>
+   <td style="text-align:right;"> 6.3441210 </td>
+   <td style="text-align:right;"> 6.4517213 </td>
+   <td style="text-align:right;"> 2107.70284 </td>
+   <td style="text-align:right;"> 6.5393767 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Sweden </td>
+   <td style="text-align:right;"> 6.5941001 </td>
+   <td style="text-align:right;"> 0.8514579 </td>
+   <td style="text-align:right;"> 0.8514579 </td>
+   <td style="text-align:right;"> 635.66380 </td>
+   <td style="text-align:right;"> 5.7426422 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Belgium </td>
+   <td style="text-align:right;"> 5.5064886 </td>
+   <td style="text-align:right;"> 0.2633296 </td>
+   <td style="text-align:right;"> 0.3841398 </td>
+   <td style="text-align:right;"> 594.10418 </td>
+   <td style="text-align:right;"> 5.1223488 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Spain </td>
+   <td style="text-align:right;"> 8.4025502 </td>
+   <td style="text-align:right;"> 3.4792779 </td>
+   <td style="text-align:right;"> 3.4792779 </td>
+   <td style="text-align:right;"> 1427.38068 </td>
+   <td style="text-align:right;"> 4.9232723 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Norway </td>
+   <td style="text-align:right;"> 8.0241155 </td>
+   <td style="text-align:right;"> 4.6337837 </td>
+   <td style="text-align:right;"> 4.6337837 </td>
+   <td style="text-align:right;"> 482.17485 </td>
+   <td style="text-align:right;"> 3.3903318 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Switzerland </td>
+   <td style="text-align:right;"> 2.5267235 </td>
+   <td style="text-align:right;"> 0.0721057 </td>
+   <td style="text-align:right;"> 0.0721057 </td>
+   <td style="text-align:right;"> 800.64016 </td>
+   <td style="text-align:right;"> 2.4546178 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Austria </td>
+   <td style="text-align:right;"> 3.2413840 </td>
+   <td style="text-align:right;"> 1.1679947 </td>
+   <td style="text-align:right;"> 1.1679947 </td>
+   <td style="text-align:right;"> 480.36840 </td>
+   <td style="text-align:right;"> 2.0733893 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> South Korea </td>
+   <td style="text-align:right;"> 0.9731824 </td>
+   <td style="text-align:right;"> 0.1350954 </td>
+   <td style="text-align:right;"> 0.2448574 </td>
+   <td style="text-align:right;"> 1810.95587 </td>
+   <td style="text-align:right;"> 0.7283250 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Greece </td>
+   <td style="text-align:right;"> 1.2534674 </td>
+   <td style="text-align:right;"> 0.0579104 </td>
+   <td style="text-align:right;"> 0.6295372 </td>
+   <td style="text-align:right;"> 214.87388 </td>
+   <td style="text-align:right;"> 0.6239302 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Portugal </td>
+   <td style="text-align:right;"> 1.4339895 </td>
+   <td style="text-align:right;"> 0.6055800 </td>
+   <td style="text-align:right;"> 0.8162173 </td>
+   <td style="text-align:right;"> 253.66314 </td>
+   <td style="text-align:right;"> 0.6177722 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Luxembourg </td>
+   <td style="text-align:right;"> 0.3993519 </td>
+   <td style="text-align:right;"> 0.0022178 </td>
+   <td style="text-align:right;"> 0.0022178 </td>
+   <td style="text-align:right;"> 85.50624 </td>
+   <td style="text-align:right;"> 0.3971341 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Slovakia </td>
+   <td style="text-align:right;"> 1.3261418 </td>
+   <td style="text-align:right;"> 0.0847808 </td>
+   <td style="text-align:right;"> 1.0687955 </td>
+   <td style="text-align:right;"> 116.52710 </td>
+   <td style="text-align:right;"> 0.2573463 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Croatia </td>
+   <td style="text-align:right;"> 0.6331361 </td>
+   <td style="text-align:right;"> 0.0042856 </td>
+   <td style="text-align:right;"> 0.6815913 </td>
+   <td style="text-align:right;"> 68.95508 </td>
+   <td style="text-align:right;"> -0.0484552 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Iceland </td>
+   <td style="text-align:right;"> 0.0400927 </td>
+   <td style="text-align:right;"> 0.1072445 </td>
+   <td style="text-align:right;"> 0.1072445 </td>
+   <td style="text-align:right;"> 25.60242 </td>
+   <td style="text-align:right;"> -0.0671518 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Latvia </td>
+   <td style="text-align:right;"> 0.6468129 </td>
+   <td style="text-align:right;"> 0.8125267 </td>
+   <td style="text-align:right;"> 0.8406277 </td>
+   <td style="text-align:right;"> 39.85350 </td>
+   <td style="text-align:right;"> -0.1938148 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Ireland </td>
+   <td style="text-align:right;"> 1.7247225 </td>
+   <td style="text-align:right;"> 1.8565901 </td>
+   <td style="text-align:right;"> 1.9250412 </td>
+   <td style="text-align:right;"> 504.18260 </td>
+   <td style="text-align:right;"> -0.2003187 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Lithuania </td>
+   <td style="text-align:right;"> 1.3035863 </td>
+   <td style="text-align:right;"> 0.1926382 </td>
+   <td style="text-align:right;"> 1.5967266 </td>
+   <td style="text-align:right;"> 66.44526 </td>
+   <td style="text-align:right;"> -0.2931403 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Australia </td>
+   <td style="text-align:right;"> 0.6365659 </td>
+   <td style="text-align:right;"> 0.8016380 </td>
+   <td style="text-align:right;"> 0.9423831 </td>
+   <td style="text-align:right;"> 1552.66736 </td>
+   <td style="text-align:right;"> -0.3058172 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Slovenia </td>
+   <td style="text-align:right;"> 0.3913521 </td>
+   <td style="text-align:right;"> 0.9960848 </td>
+   <td style="text-align:right;"> 0.9960848 </td>
+   <td style="text-align:right;"> 61.74859 </td>
+   <td style="text-align:right;"> -0.6047327 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Finland </td>
+   <td style="text-align:right;"> 3.8296113 </td>
+   <td style="text-align:right;"> 4.1275167 </td>
+   <td style="text-align:right;"> 4.5250135 </td>
+   <td style="text-align:right;"> 297.30188 </td>
+   <td style="text-align:right;"> -0.6954022 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Cyprus </td>
+   <td style="text-align:right;"> 0.1511983 </td>
+   <td style="text-align:right;"> 1.4362164 </td>
+   <td style="text-align:right;"> 1.5029862 </td>
+   <td style="text-align:right;"> 28.40787 </td>
+   <td style="text-align:right;"> -1.3517879 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Romania </td>
+   <td style="text-align:right;"> 1.5116474 </td>
+   <td style="text-align:right;"> 0.7373841 </td>
+   <td style="text-align:right;"> 3.3889639 </td>
+   <td style="text-align:right;"> 284.08756 </td>
+   <td style="text-align:right;"> -1.8773165 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> New Zealand </td>
+   <td style="text-align:right;"> 0.0505598 </td>
+   <td style="text-align:right;"> 2.1016235 </td>
+   <td style="text-align:right;"> 2.5841438 </td>
+   <td style="text-align:right;"> 249.88569 </td>
+   <td style="text-align:right;"> -2.5335840 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Czech Republic </td>
+   <td style="text-align:right;"> 2.8123711 </td>
+   <td style="text-align:right;"> 5.5093009 </td>
+   <td style="text-align:right;"> 5.5093009 </td>
+   <td style="text-align:right;"> 281.77789 </td>
+   <td style="text-align:right;"> -2.6969298 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Hungary </td>
+   <td style="text-align:right;"> 0.9293242 </td>
+   <td style="text-align:right;"> 0.0400927 </td>
+   <td style="text-align:right;"> 4.0265892 </td>
+   <td style="text-align:right;"> 181.84802 </td>
+   <td style="text-align:right;"> -3.0972650 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Malta </td>
+   <td style="text-align:right;"> 0.0807054 </td>
+   <td style="text-align:right;"> 5.4945799 </td>
+   <td style="text-align:right;"> 5.4945799 </td>
+   <td style="text-align:right;"> 17.36404 </td>
+   <td style="text-align:right;"> -5.4138745 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Bulgaria </td>
+   <td style="text-align:right;"> 0.6564385 </td>
+   <td style="text-align:right;"> 6.1618788 </td>
+   <td style="text-align:right;"> 6.2144780 </td>
+   <td style="text-align:right;"> 84.05631 </td>
+   <td style="text-align:right;"> -5.5580395 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Turkey </td>
+   <td style="text-align:right;"> 0.0721057 </td>
+   <td style="text-align:right;"> 9.7417417 </td>
+   <td style="text-align:right;"> 9.7417417 </td>
+   <td style="text-align:right;"> 819.03518 </td>
+   <td style="text-align:right;"> -9.6696360 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Estonia </td>
+   <td style="text-align:right;"> 1.3236366 </td>
+   <td style="text-align:right;"> 32.1066438 </td>
+   <td style="text-align:right;"> 37.7962519 </td>
+   <td style="text-align:right;"> 37.19117 </td>
+   <td style="text-align:right;"> -36.4726154 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> United Kingdom </td>
+   <td style="text-align:right;"> 17.0196347 </td>
+   <td style="text-align:right;"> 71.8588265 </td>
+   <td style="text-align:right;"> 71.8588265 </td>
+   <td style="text-align:right;"> 3131.37776 </td>
+   <td style="text-align:right;"> -54.8391918 </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Note: </span> <sup></sup> All numbers are in $ billions</td></tr></tfoot>
+</table> <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"]]}})</script><script async src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
