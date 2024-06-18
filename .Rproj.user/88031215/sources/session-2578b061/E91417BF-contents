@@ -9,7 +9,7 @@ output:
 The purpose of this README markdown file is to explain my thinking during the coding aspect of the final exam for Data Science Methods for Economics and Finance in June 2024.
 
 
-```{r, message = FALSE}
+```{r, message = FALSE, echo=FALSE}
 
 rm(list = ls()) # Clean your environment:
 gc()
