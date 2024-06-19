@@ -1,0 +1,26 @@
+{
+    "id": "10C7B24E",
+    "path": "~/.Renviron",
+    "project_path": null,
+    "type": "sh",
+    "hash": "3384851637",
+    "contents": "",
+    "dirty": false,
+    "created": 1718789327965.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "4,14",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1718789491,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1718789491700,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,6 +1,6 @@
 Create_Table = function(data){
 
-    pacman::p_load(knitr, kableExtra)
+    pacman::p_load(knitr, kableExtra, tidyverse)
 
     table <- data %>% filter(!is.na(`Share in EU allocations($ billion)`)) %>%
         mutate(Total_Individual_Commitments = `Total bilateral commitments($ billion)`,

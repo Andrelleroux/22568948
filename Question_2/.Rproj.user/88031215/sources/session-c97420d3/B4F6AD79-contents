@@ -1,10 +1,10 @@
-Ridge_plot <- function(Baby_names_df){
+Ridge_plot <- function(Baby_names_df, no_countries = 10){
 
     library(tidyverse)
     library(ggridges)
 
     top_baby_names_df <- Baby_names_df %>% group_by(Name) %>% summarise(Total_Babies = sum(Count)) %>% arrange(desc(Total_Babies)) %>%
-        head(10) %>% select(Name) %>% as.vector()
+        head(no_countries) %>% select(Name) %>% as.vector()
 
     plot_1_df <-  Baby_names_df %>% group_by(Year, Name) %>% summarise(Total_Babies = sum(Count)) %>%
         filter(Name == c(top_baby_names_df$Name))

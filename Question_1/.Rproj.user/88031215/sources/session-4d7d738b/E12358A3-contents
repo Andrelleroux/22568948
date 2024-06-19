@@ -16,14 +16,9 @@ output:
     # change to true for a self-contained document, but it'll be a litte slower for Pandoc to render
     self_contained: TRUE
 abstract: |
-    This is an abstract. Much can be written here. Uncomment this line to go without an abstract.
-    Abstracts have no spaces, but can have bullets.
-
-    Bullets can be created as follows
-
-    + You can add bullets, but do not add colons please.
-
-    + Line breaks are also not permitted.
+    This report will analyse the changes in the names of babies between 1910 and 2014. This allows for
+    more relatable naming conventions when naming children's toys. I find that the time period for which a
+    name is relevant is decreasing and that certain names have a more consistent presence, while other are fleeting.
 
 ---
 
@@ -39,138 +34,46 @@ list.files('code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.
 
 # Introduction {-}
 
-# Data  {-}
+This report will use yearly data collected on the names of babies born in each state in the United States of America (USA).
+This data is combined to form a national collection of baby names per year. I then use this database to run analysis on 
+the naming convention of babies in the USA.
 
-<!-- The following is a code chunk. It must have its own unique name (after the r), or no name. After the comma follows commands for R which are self-explanatory. By default, the code and messages will not be printed in your pdf, just the output: -->
+# Analysis  {-}
+
+The first section of analysis is conducted on the staying power of baby names in the USA. This is done by calculating the Spearman rank correlation for the top 25 names in a year and the ranking of those names three years later. A high value represents a high correlation between the top 25 names in a year and the top 25 names three years later.
+
+##### Figure 1: {-}
 
 ```{r }
 #First we extract the data from the RDS files and combine them into one dataset
 Baby_names_df <- Data_Reading("data/Baby_Names_By_US_State.rds")
 
+```
+
+```{r}
 #Next we calculate and plot the correlation in Baby Names
 plot_corr <- Corr_plot(Baby_names_df)
+plot_corr
+```
 
+From _figure 1_ we can see that the staying power of names over a three year period was very high, ranging between 0.85 and 1 from 1910 to 1930. After this the staying power decrease substantially over time, we can see from the fitted line that there is a substantial decrease of the rank correlation of baby names at a 95% confidence level. The trend has also become substantially more erratic, with some years having rank correlations of above 0.8, while 2007 had a rank correlation of only 0.345.
+
+This suggests that the most common names are changing more and more between three year cycles. In order to adapt to this I suggest that the names of toys should be focused on popular names from the near past in order to capture the benefits of relatable naming conventions. The next section of research will analyse the staying power of specific names rather than names in general.
+
+In _figure 1_ we analysed the staying power of the most popular names across time, however we did not look at the staying power of individual names across time. This is what I do in the following figure, I look at the top 15 most popular names across the entire sample and analyse their individual density plots across the time frame. 
+
+##### Figure 2: {-}
+
+```{r}
 #We can then plot the density of the most popular names over time
 plot_ridge <- Ridge_plot(Baby_names_df)
 plot_ridge
 ```
 
-#  Methodology \label{Meth} {-}
-
-## Subsection {-}
-Ideally do not overuse subsections. It equates to bad writing.^[This is an example of a footnote by the way. Something that should also not be overused.]
-
-## Math section {-}
-
-Equations should be written as such:
-
-\begin{align}
-\beta = \sum_{i = 1}^{\infty}\frac{\alpha^2}{\sigma_{t-1}^2} \label{eq1} \\
-\int_{x = 1}^{\infty}x_{i} = 1 \notag
-\end{align}
-
-If you would like to see the equations as you type in Rmarkdown, use $ symbols instead (see this for yourself by adjusted the equation):
-
-$$
-\beta = \sum_{i = 1}^{\infty}\frac{\alpha^2}{\sigma_{t-1}^2} \\
-\int_{x = 1}^{\infty}x_{i} = 1
-$$
-
-Writing nice math requires practice. Note I used a forward slashes to make a space in the equations. I can also align equations using  __\&__, and set to numbering only the first line. Now I will have to type ``begin equation'' which is a native \LaTeX command. Here follows a more complicated equation:
-
-
-\begin{align}
-	y_t &= c + B(L) y_{t-1} + e_t   \label{eq2}    \\ \notag
-	e_t &= H_t^{1/2}  z_t ; \quad z_t \sim  N(0,I_N) \quad \& \quad H_t = D_tR_tD_t \\ \notag
-		D_t^2 &= {\sigma_{1,t}, \dots, \sigma_{N,t}}   \\ \notag
-		\sigma_{i,t}^2 &= \gamma_i+\kappa_{i,t}  v_{i, t-1}^2 +\eta_i  \sigma_{i, t-1}^2, \quad \forall i \\ \notag
-		R_{t, i, j} &= {diag(Q_{t, i, j}}^{-1}) . Q_{t, i, j} . diag(Q_{t, i, j}^{-1})  \\ \notag
-		Q_{t, i, j} &= (1-\alpha-\beta)  \bar{Q} + \alpha  z_t  z_t'  + \beta  Q_{t, i, j} \notag
-\end{align}
-
-Note that above we've aligned the equations by the equal signs. I also want only one tag, and I create spaces using ``quads''.
-
-See if you can figure out how to do complex math using the two examples provided.
-
-<!-- $$ -->
-<!-- This is a commented out section in the writing part. -->
-<!-- Comments are created by highlighting text, amnd pressing CTL+C -->
-<!-- \\begin{align} -->
-<!-- \\beta = \\alpha^2 -->
-<!-- \end{align} -->
-<!-- $$ -->
-
-## Results {-}
-
-Tables can be included as follows. Use the _xtable_ (or kable) package for tables. Table placement = H implies Latex tries to place the table Here, and not on a new page (there are, however, very many ways to skin this cat. Luckily there are many forums online!).
-
-```{r table-1, echo=TRUE, message=FALSE, warning=FALSE, results="asis"}
-library(knitr)
-library(kableExtra)
-
-data <- mtcars[1:5,] %>% tibble::as_tibble()
-
-table <- kable(data, row.names = TRUE,
-      caption = 'Table with kable() and kablestyling()',
-      format = "html", booktabs = T) %>%
-        kable_styling(full_width = T,
-                      latex_options = c("striped",
-                                        "scale_down",
-                                        "HOLD_position"),
-                      font_size = 13)
-table
-```
-
-To reference calculations __in text__, _do this:_ From table \@ref(tab:table-1) we see the average value of mpg is `r mean(mtcars[1:5,]$mpg)`. Notice the use of table-2 in the chunk name. That's the good stuff.
-
-\newpage
-
-
-# Model summary
-
-
-Check [this](https://vincentarelbundock.github.io/modelsummary/articles/modelsummary.html) link out for more. Note this package also plays nicely with gt, kableExtra, etc.
+When looking at _figure 2_ we can see that different names have very different distributions between 2010 and 2014. For example, the name William has a relatively normal distribution, which suggests a consistent level across time, while the name James has a distribution with two distinct peaks, suggesting relevance in the earlier and later parts of the sample. From this emerges different strategies that can be used when naming toys. The risk averse and longer lasting choice would be to go for a consistent name such as Richard, while the more risky and short term strategy would be to go for a name that is very prevalent at certain points in time, such as Robert.   
 
 ```{r}
 
-library(modelsummary);library(gt)
-
-# modelsummary works well with gt:
-
-Tab <-
-
-datasummary_skim(swiss,
-type="numeric",
- histogram=T,
- title = "Summary: Numeric variables", output = "gt") %>%
-
-        # column labels
-    tab_spanner(label = 'Statistics', columns = c("Mean", "SD")) %>%
-    tab_spanner(label = 'Quantiles', columns = starts_with("P")) %>%
-    # footnote
-    tab_footnote(footnote = md("A very **important** Footnote."),
-                 locations = cells_body(rows = 3, columns = 1)) %>%
-
-    tab_options(data_row.padding = px(4),table.width = pct(60),
-            column_labels.font.size = pct(100),
-            column_labels.vlines.width = 1, table.font.size = pct(60))
-
-Tab
 ```
 
-
-# References {-}
-
-<div id="refs"></div>
-
-
-# Appendix {-}
-
-## Appendix A {-}
-
-Some appendix information here
-
-## Appendix B {-}
-
-
-
+# Conclusion {-}
