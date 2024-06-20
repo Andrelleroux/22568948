@@ -1,4 +1,4 @@
-Create_Table = function(data){
+Create_Table = function(data, Markdown = FALSE){
 
     pacman::p_load(knitr, kableExtra, tidyverse)
 
@@ -13,19 +13,28 @@ Create_Table = function(data){
         select(Country, Total_Commitments, Total_Allocations,
                `GDP in 2021($ billion)`, Difference) %>%
         arrange(desc(Difference)) %>%
-        filter(Difference >= 5.5 | Difference <= -1) %>%
+        filter(Difference >= 5.5 | Difference <= -1)
 
-        knitr::kable(format = "html",
+    if(Markdown){
+        Tab <- knitr::kable(table, format = "markdown",
+                            caption = "Difference Between Promises and Results",
+                            col.names = c("Country", "Commitments",
+                                          "Allocations", "GDP in 2021",
+                                          "Difference"))
+
+    }else{
+        Tab <- knitr::kable(table, format = "html",
                      caption = "Difference Between Promises and Results",
                      col.names = c("Country", "Commitments",
                                    "Allocations", "GDP in 2021",
                                    "Difference")) %>%
-        kable_styling("striped", full_width = F, font_size = 12) %>%
+            kable_styling("striped", full_width = F, font_size = 12) %>%
             column_spec(1, bold = T) %>%
             footnote(general = "All numbers are in $ billions",
                      general_title = "Note: ",
                      footnote_as_chunk = T)
+    }
 
-    table
+    Tab
 
 }

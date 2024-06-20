@@ -6,7 +6,8 @@ Make_Map_Data <- function(data){
 
     adapt_aid <- read_Data %>%
         mutate(Ratio_Commitment = (`Total bilateral commitments($ billion)` + `Share in EU commitments($ billion)`) /
-                   `GDP in 2021($ billion)`) %>% mutate(Rank_Ratio_Commitment = min_rank(Ratio_Commitment)) %>%
+                   `GDP in 2021($ billion)`) %>%
+        mutate(Rank_Ratio_Commitment = min_rank(Ratio_Commitment)) %>%
         rename(name = Country) %>%
         mutate(name = ifelse(name == "Czech Republic", "Czechia", name))
 

@@ -1,0 +1,72 @@
+---
+title: "From Russia With No Love Report"
+author: "André le Roux"
+date: "June 2024"
+# date: "`r Sys.Date()`"
+bibliography: Tex/ref.bib       # Do not edit: Keep this naming convention and location.
+output:
+  pagedown::html_paged:
+    # template: wp_paged.html
+    # css: ['wp.css', 'wp-fonts.css', 'wp-page.css']
+    css: ["Template/default-fonts-Texevier.css", "Template/default-page-Texevier.css", "Template/default-Texevier.css"]
+    csl: Template/harvard-stellenbosch-university.csl # referencing format used.
+    template: ["Template/paged-Texevier.html"]
+
+    toc: true
+    # change to true for a self-contained document, but it'll be a litte slower for Pandoc to render
+    self_contained: TRUE
+abstract: |
+    This report provides a short summary of the level of aid provided to Ukraine from Europe
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+pacman::p_load(modelsummary, gt, knitr, kableExtra, tidyverse)
+
+setwd("C:/Users/andre/OneDrive/Documents/Masters_2024_stuff/Data_Science/Data_Science_Exam/22568948/Question_3")
+list.files('code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.list() %>% walk(~source(.))
+```
+
+\newpage
+
+# Data {-}
+
+The data used is on the breakdown of both financial commitments and allocations from countries towards Ukraine.
+
+# Analysis {-}
+
+The first figure is analysis on the percentage of GDP (by 2021 levels) that has been committed to the cause in Ukraine. This allows us to take into account the ability of the country to give and provides an estimate of intentions.
+
+##### Figure 1: {-}
+```{r, fig.height = 7, fig.width = 9}
+read_Data <- Data_Read(data_root = "data/")
+
+Map_df <- Make_Map_Data(read_Data)
+
+map_plot <- Create_Map(Map_df)
+map_plot
+
+```
+These are the key takeaways from _figure 1_:
+
+* Turkey has committed the lowest percentage of GDP at 0.00009%.
+* Estonia has committed the highest percentage at 0.036%.
+* It seems that more northern countries are willing to give a higher percentage of GDP.
+
+Next we look at the difference between what has been promised and what has been delivered. I subtract the total allocations from the total contributions and calculate the difference, as seen below.  
+
+```{r }
+
+table <- Create_Table(read_Data)
+table
+
+```
+
+_Table 1_ has the following key takeaways:
+
+* The United States and Germany have together promised $118.79 billion more than what they have delivered.
+* Estonia and the United Kingdom have allocated a combined $91.31 billion more than what they committed to.
+* Australia has allocated $305.82 million __more__ than they committed for. 
+
+# Script {-}

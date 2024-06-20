@@ -12,4 +12,6 @@ Create_Map <- function(data){
              fill = "Percentage of GDP") + theme_bw() +
         coord_sf(xlim = c(-23, 50), ylim = c(32, 75))
 
+    plot1
+
 }
