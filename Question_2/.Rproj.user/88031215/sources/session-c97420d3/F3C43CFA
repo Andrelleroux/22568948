@@ -3,7 +3,7 @@
     "path": "~/Masters_2024_stuff/Data_Science/Data_Science_Exam/22568948/Question_2/Question_2.Rmd",
     "project_path": "Question_2.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "749783211",
     "contents": "",
     "dirty": false,
     "created": 1718705748136.0,
@@ -12,16 +12,16 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "44,52",
-        "scrollLine": "37",
+        "cursorPosition": "84,311",
+        "scrollLine": "80",
         "last_setup_crc32": "c97420d3d259eeac"
     },
     "folds": "",
-    "lastKnownWriteTime": 1718828974,
+    "lastKnownWriteTime": 1718861482,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1718828974502,
+    "last_content_update": 1718861482249,
     "read_only": false,
     "read_only_alternatives": []
 }

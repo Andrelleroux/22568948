@@ -1,0 +1,5 @@
+Name_Growth_Table <- function(data, data_root){
+    
+    charts <- read_rds("data/charts.rds")
+    
+}

@@ -18,7 +18,7 @@ setwd("C:/Users/andre/OneDrive/Documents/Masters_2024_stuff/Data_Science/Data_Sc
 library(tidyverse)
 ```
 
-##Packages
+#Packages
 
 What follows is the list of packages that have been used throughout the functions of this project:
 
@@ -34,7 +34,7 @@ What follows is the list of packages that have been used throughout the function
 * GGally
 * dbbasic
 
-##Question 1
+#Question 1
 
 It is firstly important that the working directory of the project is properly allocated as the directory is used to create folders and projects. All Texevier lines of code was commented as the projects had already been created.
 
@@ -75,7 +75,7 @@ This first step in this function is to take the same base dataframe and group by
 
 Then I can group by Year and Name to summarise by count and filter for the top _no_names_ names in each year. I then use the ggridges package to plot a density ridge plot for the popularity of the most popular names over time. Using alpha = 0.5 to make the graphs more see through. 
 
-##Question 2
+#Question 2
 
 This section explains the coding behind question 2 of the exam. The following code was used to create the project and to fetch the function to be used in Question 2 from the code folder.
 
@@ -132,7 +132,7 @@ Comparison_plot
 
 In this function we firstly rename the relevant variables in the first dataframe to appropiately leftjoin with the supplementary dataframe and pivot the table to have the musical features as columns. This allows me to plot a violin graph for each Band and popular music, which is then facet wrapped with the different musical features. Y scales are set to free and alpha is low for interpretability. 
 
-##Question 3
+#Question 3
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 #Firstly Create the Texevier project
@@ -174,7 +174,7 @@ The Create_Table() function takes the initial dataset and firstly removes missin
 
 I then arrange by the difference and filter the values so that only the extremes on either side shows up. The dataframe is then piped to a kable function which turns it into a table.
 
-##Question 4
+#Question 4
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 #Firstly Create the Texevier project
@@ -224,7 +224,7 @@ weight_plot
 
 This function focuses specifically on the sport of weightlifting at the Olympics. I then filter by weightlifting and calculate the total medal tallies for all countries in weightlifting. I then take the top _no_countries_ (where _no_countries_ can be set, but the default is 10). I then calculate and plot the cumulative medal over time for the top countries and draw a line plot with geometric points. I add a vertical line at the year 1967 as this is when performance enhancing drugs was outlawed. 
 
-##Question 5
+#Question 5
 
 
 ```{r, results='hide', message=FALSE, warning=FALSE}

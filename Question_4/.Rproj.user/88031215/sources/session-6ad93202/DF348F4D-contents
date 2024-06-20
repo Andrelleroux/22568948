@@ -50,7 +50,7 @@ For the first question I create a figure which displays the countries with GDP's
 ```{r }
 Olympic_df <- Entering_Data("data/")
 
-India_plot <- India_Comparison_Plot(data = Olympic_df)
+India_plot <- India_Comparison_Plot(data_df = Olympic_df)
 India_plot
 
 ```
@@ -89,7 +89,7 @@ Based on the graph we can see that the ban had little impact on the performance 
 
 # Conclusion {-}
 
-
+India are currently doing well when compared to their economic development. Being one of the countries with the best difference in ranking between medal tally and gdp per capita. They are also fortunate as they perform considerably better in the Summer Olympics, which have had a considerably higher impact on medal tallies in the top 9 countries.
 
 
 
