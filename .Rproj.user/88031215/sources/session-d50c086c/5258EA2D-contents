@@ -1,8 +1,8 @@
-Create_Table_Punching <- function(data, top_bot_size = 41, Markdown = FALSE, data_root = "data/"){
+Create_Table_Punching <- function(data, top_bot_size = 41, Markdown = FALSE){
 
     pacman::p_load(tidyverse, knitr, kableExtra)
 
-    GDP <- read_rds(glue::glue("{data_root}GDP.rds")) %>% select(Country, Code, Population, `GDP per Capita`)
+    GDP <- read_rds(glue::glue("data/GDP.rds")) %>% select(Country, Code, Population, `GDP per Capita`)
 
     table_df <- data %>% group_by(Year, Event, Sport, Medal) %>%
         count(Country) %>%
@@ -20,16 +20,16 @@ Create_Table_Punching <- function(data, top_bot_size = 41, Markdown = FALSE, dat
         mutate(Rank_Diff = Rank_GDP - Rank_Medals) %>%
         filter(Rank_Diff < -top_bot_size | Rank_Diff > top_bot_size) %>%
         arrange(desc(Rank_Diff)) %>%
-        select(Country.y, Medal_Tally, `GDP per Capita`, Rank_GDP, Rank_Medals, Rank_GDP, Rank_Diff)
+        select(Country.y, Medal_Tally, `GDP per Capita`, Rank_GDP, Rank_Medals, Rank_GDP, Rank_Diff) %>%
 
         if(Markdown){
-            Tab <- knitr::kable(table_df, format = "markdown",
+            Tab <- knitr::kable(table_df,format = "markdown",
                                 caption = "Who Outperforms Economic Expectations in the Olympics?",
-                         col.names = c("Country", "Medal Tally", "GDP per Capita", "GDP Rank",
-                                       "Medals Rank", "Rank Difference"))
+                         col.names = c("Country", "Medal Tally    ", "GDP per Capita    ", "GDP Rank    ",
+                                       "Medals Rank    ", "Rank Difference"), label = NA)
 
         }else{
-            Tab <- knitr::kable(table_df, format = "html", caption = "Who Outperforms Economic Expectations in the Olympics?",
+            Tab <- knitr::kable(table_df, caption = "Who Outperforms Economic Expectations in the Olympics?",
                          col.names = c("Country", "Medal Tally    ", "GDP per Capita    ", "GDP Rank    ",
                                        "Medals Rank    ", "Rank Difference"), label = NA) %>%
                 column_spec(1, bold = T) %>% kable_styling(full_width = F, font_size = 12)

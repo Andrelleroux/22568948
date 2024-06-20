@@ -1,0 +1,19 @@
+Make_Map_Data <- function(data){
+
+    pacman::p_load(tidyverse, lwgeom, sf, rnaturalearth, rnaturalearthdata)
+
+    world_broad <- ne_countries(scale = "medium", returnclass = "sf")
+
+    adapt_aid <- read_Data %>%
+        mutate(Ratio_Commitment = (`Total bilateral commitments($ billion)` + `Share in EU commitments($ billion)`) /
+                   `GDP in 2021($ billion)`) %>%
+        mutate(Rank_Ratio_Commitment = min_rank(Ratio_Commitment)) %>%
+        rename(name = Country) %>%
+        mutate(name = ifelse(name == "Czech Republic", "Czechia", name))
+
+    Merged <- left_join(world_broad, adapt_aid, by = c("name")) #%>%
+        #mutate(Ratio_Commitment = ifelse(is.na(Ratio_Commitment),replace_na(Ratio_Commitment, 0), Ratio_Commitment))
+
+    Merged
+
+}

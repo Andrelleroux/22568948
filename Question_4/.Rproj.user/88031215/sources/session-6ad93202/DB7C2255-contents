@@ -1,6 +1,6 @@
-India_Comparison_Plot <- function(data_df, Range_size = 10){
+India_Comparison_Plot <- function(data_df, Range_size = 10, data_root = "data/"){
 
-    GDP <- read_rds(glue::glue("data/GDP.rds")) %>%
+    GDP <- read_rds(glue::glue("{data_root}GDP.rds")) %>%
         select(Code, Population, `GDP per Capita`)
 
     plot_df <- data_df %>%

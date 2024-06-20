@@ -13,6 +13,23 @@ setwd("C:/Users/andre/OneDrive/Documents/Masters_2024_stuff/Data_Science/Data_Sc
 library(tidyverse)
 ```
 
+##Packages
+
+What follows is the list of packages that have been used throughout the
+functions of this project:
+
+-   tidyverse (includes ggplot2, dplyr)
+-   Texevier
+-   knitr
+-   kableExtra
+-   lwgeom
+-   sf
+-   rnaturalearth
+-   rnaturalearthdata
+-   ggridges
+-   GGally
+-   dbbasic
+
 ##Question 1
 
 It is firstly important that the working directory of the project is
@@ -288,11 +305,147 @@ function which turns it into a table.
 ``` r
 #Firstly Create the Texevier project
 #Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_name = "Question_4")
+
+#Secondly I fetch the functions that I wrote from the code folder in Question 4
+list.files('Question_4/code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.list() %>% walk(~source(.))
 ```
+
+The first chunk fetched the function from where they are stored in the
+code folder under Question_4.
+
+``` r
+Olympic_df <- Entering_Data("Question_4/data/")
+```
+
+The first function (Entering_Data()) reads the data out of their
+respective rds files, one for the Summer Olympics, one for the Winter
+Olympics and one for the GDP per country. Both Summer and Winter
+datasets are appended with a column stating whether it is the Winter or
+Summer Olympics. These two are binded together by rows before being left
+joined by the GDP dataset by the three letter codes.
+
+``` r
+India_plot <- India_Comparison_Plot(data = Olympic_df, data_root = "Question_4/data/")
+India_plot
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-20-1.png)
+
+For this function it is important that I get to the total amount of
+unique medals won by each country. Firstly I filter so that I only have
+Summer observations. Then I group by year, event, sport and medal, this
+allows me to count by country to get the total amount of medals per
+medal event. Then I can group by country and summarise by gold, silver
+and bronze medals. This allows me to create a column which is the medal
+tally for each country.
+*M**e**d**a**l**T**a**l**l**y* = 3 × *G**o**l**d**M**e**d**a**l**s* + 2 × *S**i**l**v**e**r**M**e**d**a**l**s* + 1 × *B**r**o**n**z**e**M**e**d**a**l**s*
+I then rejoin the GDP dataset and rank the countries by GDP per capita.
+
+After this I can find the rank of India and filter so that the dataframe
+only contains India and the *Range_size* (where *Range_size* can be set,
+default is 10) above and below India according to GDP per capita. This
+can be piped to a lollipop plot which allows me to analyse the medal
+tallies of surrounding countries. Lollipop size is scaled with the
+square root of population to account for the exponential differences
+across countries.
+
+``` r
+stack_plot <- Stacked_Medal_Plot(Olympic_df)
+stack_plot
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-21-1.png)
+
+In the Stacked_Medal_Plot() function we first alter the operations from
+the previous function that returns the medal tally per country so that
+it gives the total medal tally in the dataset, we then arrange the
+dataset in descending order of medal tally and take the top 9 countries
+(excluding the Soviet Union and East Germany).
+
+This is then used to filter the overall dataset by these 9 countries and
+plot a stacked line chart between winter and summer Olympics for the
+nine most historically successful nations. Facet wrap is used to see the
+different countries side by side.
+
+``` r
+punching_table <- Create_Table_Punching(Olympic_df, Markdown = TRUE, data_root = "Question_4/data/")
+punching_table
+```
+
+| Country              | Medal Tally | GDP per Capita | GDP Rank | Medals Rank | Rank Difference |
+|:-----------------|----------:|------------:|-------:|----------:|-------------:|
+| Ethiopia             |          84 |       619.1694 |      113 |        37.0 |            76.0 |
+| Kenya                |         158 |      1376.7128 |      102 |        29.0 |            73.0 |
+| Ukraine              |         218 |      2114.9547 |       95 |        24.0 |            71.0 |
+| China                |        1002 |      8027.6838 |       62 |         7.0 |            55.0 |
+| India                |          50 |      1598.2590 |       99 |        44.0 |            55.0 |
+| Russia               |         978 |      9092.5805 |       57 |         9.0 |            48.0 |
+| Uganda               |          14 |       705.2926 |      112 |        66.5 |            45.5 |
+| Zimbabwe             |          18 |       924.1438 |      108 |        63.0 |            45.0 |
+| Egypt                |          52 |      3614.7468 |       87 |        43.0 |            44.0 |
+| Indonesia            |          48 |      3346.4870 |       89 |        45.0 |            44.0 |
+| Bulgaria             |         406 |      6993.4774 |       63 |        20.0 |            43.0 |
+| Uzbekistan           |          38 |      2132.0704 |       94 |        52.0 |            42.0 |
+| Gabon                |           2 |      8266.4456 |       60 |       104.0 |           -44.0 |
+| Israel               |          10 |     35728.0935 |       23 |        70.0 |           -47.0 |
+| Saudi Arabia         |           4 |     20481.7453 |       33 |        88.0 |           -55.0 |
+| Mauritius            |           1 |      9252.1107 |       54 |       114.0 |           -60.0 |
+| Hong Kong\*          |           6 |     42327.8400 |       16 |        78.0 |           -62.0 |
+| Iceland              |           6 |     50173.3399 |       11 |        78.0 |           -67.0 |
+| Luxembourg           |           9 |    101449.9682 |        1 |        72.0 |           -71.0 |
+| Barbados             |           1 |     15429.3405 |       41 |       114.0 |           -73.0 |
+| Cyprus               |           2 |     23242.8401 |       29 |       104.0 |           -75.0 |
+| United Arab Emirates |           3 |     40438.7629 |       19 |        96.0 |           -77.0 |
+| Kuwait               |           2 |     29300.5756 |       26 |       104.0 |           -78.0 |
+| Singapore            |           4 |     52888.7447 |        8 |        88.0 |           -80.0 |
+| Bahrain              |           1 |     22600.2141 |       31 |       114.0 |           -83.0 |
+| Qatar                |           4 |     73653.3944 |        4 |        88.0 |           -84.0 |
+
+Who Outperforms Economic Expectations in the Olympics?
+
+In this function we perform similar operation to the previous function,
+but we then continue to rank countries by total medal tally and also by
+GDP per capita. Once we have both ranks we can subtract them from each
+other to form a column that displays the difference in ranking between
+GDP per capita and medal tally. This difference in rankings is then
+filtered to just include the extremes and is then printed to a table.
+The level of extremity can be decided by adjusting *top_bot_size*
+(default of *top_bot_size* is set to 41).
+
+``` r
+weight_plot <- C_Weight_Plot(Olympic_df)
+weight_plot
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-23-1.png)
+
+This function focuses specifically on the sport of weightlifting at the
+Olympics. I then filter by weightlifting and calculate the total medal
+tallies for all countries in weightlifting. I then take the top
+*no_countries* (where *no_countries* can be set, but the default is 10).
+I then calculate and plot the cumulative medal over time for the top
+countries and draw a line plot with geometric points. I add a vertical
+line at the year 1967 as this is when performance enhancing drugs was
+outlawed.
 
 ##Question 5
 
 ``` r
 #Firstly Create the Texevier project
 #Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_name = "Question_5")
+
+list.files('Question_5/code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.list() %>% walk(~source(.))
 ```
+
+The above code created the Texevier document and calls the available
+functions from the question 5 code folder.
+
+``` r
+#Database_Connect(dataroot = "datascience")
+```
+
+The above function should in theory connect to an external database,
+however in this specific context I could not get it to work. It gives me
+an error saying that the object ‘out’ could not be found. Further work
+was done to try and get access via a dev.sql file that is not included
+here.

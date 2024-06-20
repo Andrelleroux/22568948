@@ -18,6 +18,22 @@ setwd("C:/Users/andre/OneDrive/Documents/Masters_2024_stuff/Data_Science/Data_Sc
 library(tidyverse)
 ```
 
+##Packages
+
+What follows is the list of packages that have been used throughout the functions of this project:
+
+* tidyverse (includes ggplot2, dplyr)
+* Texevier
+* knitr
+* kableExtra
+* lwgeom
+* sf
+* rnaturalearth
+* rnaturalearthdata
+* ggridges
+* GGally
+* dbbasic
+
 ##Question 1
 
 It is firstly important that the working directory of the project is properly allocated as the directory is used to create folders and projects. All Texevier lines of code was commented as the projects had already been created.
@@ -85,7 +101,7 @@ This functions alters the base dataframe to a more usable version. Firstly a var
 
 We select the variables we want and scale the relevant musical features to be on a scale between 0-100, except for tempo.
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, fig.height = 8, fig.width = 9}
 plot_box <- Plot_Pop_Box(Filtered_df)
 plot_box
 ```
@@ -164,15 +180,67 @@ I then arrange by the difference and filter the values so that only the extremes
 #Firstly Create the Texevier project
 #Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_name = "Question_4")
 
-
+#Secondly I fetch the functions that I wrote from the code folder in Question 4
+list.files('Question_4/code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.list() %>% walk(~source(.))
 ```
 
+The first chunk fetched the function from where they are stored in the code folder under Question_4.
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+Olympic_df <- Entering_Data("Question_4/data/")
+```
+
+The first function (Entering_Data()) reads the data out of their respective rds files, one for the Summer Olympics, one for the Winter Olympics and one for the GDP per country. Both Summer and Winter datasets are appended with a column stating whether it is the Winter or Summer Olympics. These two are binded together by rows before being left joined by the GDP dataset by the three letter codes.
+
+```{r, message=FALSE, warning=FALSE}
+India_plot <- India_Comparison_Plot(data = Olympic_df, data_root = "Question_4/data/")
+India_plot
+```
+
+For this function it is important that I get to the total amount of unique medals won by each country. Firstly I filter so that I only have Summer observations. Then I group by year, event, sport and medal, this allows me to count by country to get the total amount of medals per medal event. Then I can group by country and summarise by gold, silver and bronze medals. This allows me to create a column which is the medal tally for each country. $$Medal Tally = 3 \times Gold Medals + 2 \times Silver Medals + 1 \times Bronze Medals $$ I then rejoin the GDP dataset and rank the countries by GDP per capita. 
+
+After this I can find the rank of India and filter so that the dataframe only contains India and the _Range_size_ (where _Range_size_ can be set, default is 10) above and below India according to GDP per capita. This can be piped to a lollipop plot which allows me to analyse the medal tallies of surrounding countries. Lollipop size is scaled with the square root of population to account for the exponential differences across countries.
+
+```{r, message=FALSE, warning=FALSE}
+stack_plot <- Stacked_Medal_Plot(Olympic_df)
+stack_plot
+```
+
+In the Stacked_Medal_Plot() function we first alter the operations from the previous function that returns the medal tally per country so that it gives the total medal tally in the dataset, we then arrange the dataset in descending order of medal tally and take the top 9 countries (excluding the Soviet Union and East Germany). 
+
+This is then used to filter the overall dataset by these 9 countries and plot a stacked line chart between winter and summer Olympics for the nine most historically successful nations. Facet wrap is used to see the different countries side by side. 
+
+```{r, message=FALSE, warning=FALSE}
+punching_table <- Create_Table_Punching(Olympic_df, Markdown = TRUE, data_root = "Question_4/data/")
+punching_table
+```
+
+In this function we perform similar operation to the previous function, but we then continue to rank countries by total medal tally and also by GDP per capita. Once we have both ranks we can subtract them from each other to form a column that displays the difference in ranking between GDP per capita and medal tally. This difference in rankings is then filtered to just include the extremes and is then printed to a table. The level of extremity can be decided by adjusting _top_bot_size_ (default of _top_bot_size_ is set to 41).
+
+```{r, message=FALSE, warning=FALSE}
+weight_plot <- C_Weight_Plot(Olympic_df)
+weight_plot
+```
+
+This function focuses specifically on the sport of weightlifting at the Olympics. I then filter by weightlifting and calculate the total medal tallies for all countries in weightlifting. I then take the top _no_countries_ (where _no_countries_ can be set, but the default is 10). I then calculate and plot the cumulative medal over time for the top countries and draw a line plot with geometric points. I add a vertical line at the year 1967 as this is when performance enhancing drugs was outlawed. 
+
 ##Question 5
+
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 #Firstly Create the Texevier project
 #Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_name = "Question_5")
 
+list.files('Question_5/code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.list() %>% walk(~source(.))
 ```
+
+The above code created the Texevier document and calls the available functions from the question 5 code folder.
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+#Database_Connect(dataroot = "datascience")
+
+```
+
+The above function should in theory connect to an external database, however in this specific context I could not get it to work. It gives me an error saying that the object 'out' could not be found. Further work was done to try and get access via a dev.sql file that is not included here.
 
 

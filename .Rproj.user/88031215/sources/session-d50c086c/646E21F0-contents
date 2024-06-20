@@ -1,0 +1,95 @@
+---
+title: "Olympic Analysis Report"
+author: "André le Roux"
+date: "June 2024"
+# date: "`r Sys.Date()`"
+bibliography: Tex/ref.bib       # Do not edit: Keep this naming convention and location.
+output:
+  pagedown::html_paged:
+    # template: wp_paged.html
+    # css: ['wp.css', 'wp-fonts.css', 'wp-page.css']
+    css: ["Template/default-fonts-Texevier.css", "Template/default-page-Texevier.css", "Template/default-Texevier.css"]
+    csl: Template/harvard-stellenbosch-university.csl # referencing format used.
+    template: ["Template/paged-Texevier.html"]
+
+    toc: true
+    # change to true for a self-contained document, but it'll be a litte slower for Pandoc to render
+    self_contained: TRUE
+abstract: |
+    This report will analyse the following aspects of the Summer- and Winter Olympics between 1896 and 2014.
+
+    + How does India do compared to countries with similar economic per capita size?
+
+    + How and when did the most dominant countries accrue their medals? 
+    
+    + Which countries do the best despite economic circumstances?
+    
+    + What impact did the ban on performance drugs do to weightlifting medals between countries?
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+pacman::p_load(modelsummary, gt, knitr, kableExtra, tidyverse)
+
+setwd("C:/Users/andre/OneDrive/Documents/Masters_2024_stuff/Data_Science/Data_Science_Exam/22568948/Question_4")
+list.files('code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.list() %>% walk(~source(.))
+```
+
+\newpage
+
+# Data {-}
+
+The data used in this analysis is on all the medals won per individual at Summer- and Winter Olympics between 1896 and 2014. This data is then supplemented by including data on the populations and GDP levels of each country.
+
+# Analysis  {-}
+
+For the first question I create a figure which displays the countries with GDP's ranked 10 above and 10 below India and then comparing their medal tallies, where medal tallies is equal to $$Medal Tally = 3 \times Gold Medals + 2 \times Silver Medals + 1 \times Bronze Medals $$
+
+##### Figure 1: {-}
+```{r }
+Olympic_df <- Entering_Data("data/")
+
+India_plot <- India_Comparison_Plot(data = Olympic_df)
+India_plot
+
+```
+
+Based on the analysis in _figure 1_ we can see that India performs the third best out of 21 countries and with the largest population. Djibouti and Côte d'Ivoire perform the worst of those with a similar GDP per capita to India.
+
+Next we analyse the stacked area plots of the 9 modern countries that have the highest medal tallies. We stack the plots according to which season the medals are won in. 
+
+##### Figure 2: {-}
+```{r}
+stack_plot <- Stacked_Medal_Plot(Olympic_df)
+stack_plot
+
+```
+From _figure 2_ we see that the majority of countries have win considerably more medals in the Summer Olympics. This is due to the Summer Olympic being a far larger event with nearly three times the events. This shows how dependent Norway is on the Winter Olympics for their medal tally. Recently Sweden has also come to rely more on the Winter Olympics. Russia and China are in the top 9 despite very short participation windows, we can assume that they will climb the rankings quickly.
+
+Next we rank countries according to their GDP per capita and their medal tallies. Afterwards the medal rank is subtracted from the GDP rank to get an estimate for those that are very highly ranked despite a possible lack of resources when compared to others. Only those with differences above 40 and below -40 are included.
+
+```{r}
+punching_table <- Create_Table_Punching(Olympic_df)
+punching_table
+```
+
+This difference ranking is due to several factors. One is likely to be how athletic the population is, for example Kenya and Ethiopia, and another could be due to population, notice the high difference values of India and China. Qatar, Bahrain and Singapore are the countries that perform the worst in the Olympics despite having high levels of economic development.
+
+The final analysis is looking descriptively at whether the ban on performance enhancing drugs in 1967 had an impact on the ability for certain countries to get medals in weightlifting. I plot the cumulative medal tallies in weightlifting for the top 10 countries with the most medals.
+
+##### Figure 3: {-}
+```{r}
+
+weight_plot <- C_Weight_Plot(Olympic_df)
+weight_plot
+
+```
+Based on the graph we can see that the ban had little impact on the performance of the Soviet Union, either they did not use any drugs or the ban did not dissuade them. It does appear possible that the ban had an impact on the ability for America to earn medals in the sport of weightlifting.
+
+# Conclusion {-}
+
+
+
+
+
