@@ -32,7 +32,7 @@ list.files('code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.
 
 \newpage
 
-# Introduction {-}
+# Data {-}
 
 This report will use yearly data collected on the names of babies born in each state in the United States of America (USA).
 This data is combined to form a national collection of baby names per year. I then use this database to run analysis on 

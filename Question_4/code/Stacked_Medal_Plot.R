@@ -24,7 +24,7 @@ Stacked_Medal_Plot <- function(data){
              x = "Year", y = "Medal Tally per Olympic games", color = "Olympic Cycle",
              caption = "Note: Eastern Germany and the Soviet Union are excluded") +
         theme_bw()+
-        facet_wrap(~Country)
+        facet_wrap(~Country, scales = "free_y")
 
     plot_df
 }

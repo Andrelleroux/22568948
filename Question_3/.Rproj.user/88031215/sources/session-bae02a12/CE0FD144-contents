@@ -7,9 +7,9 @@ Create_Map <- function(data){
 
     plot1 <- data %>% ggplot() +
         geom_sf(aes(fill = Ratio_Commitment)) +
-        scale_fill_gradientn(colors = c("blue", "gold"), na.value = "grey60") +
+        scale_fill_gradientn(colors = c("blue", "gold"), na.value = "grey80") +
         labs(title = "Contribution to Ukrainian Aid", x = "Latitude", y = "Longitude",
-             fill = "Percentage of GDP Committed") + theme_bw() +
+             fill = "Percentage of GDP") + theme_bw() +
         coord_sf(xlim = c(-23, 50), ylim = c(32, 75))
 
 }

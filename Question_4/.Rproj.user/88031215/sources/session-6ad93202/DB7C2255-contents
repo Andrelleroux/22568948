@@ -1,18 +1,30 @@
 India_Comparison_Plot <- function(data_df, Range_size = 10){
 
-    GDP <- read_rds(glue::glue("data/GDP.rds")) %>% select(Code, Population, `GDP per Capita`)
+    GDP <- read_rds(glue::glue("data/GDP.rds")) %>%
+        select(Code, Population, `GDP per Capita`)
 
-    plot_df <- data_df %>% filter(Season == "Summer") %>% group_by(Year, Event, Sport, Medal) %>%
-        count(Country) %>% mutate(Medal_Unique = 1) %>% group_by(Country) %>%
+    plot_df <- data_df %>%
+        filter(Season == "Summer") %>%
+        group_by(Year, Event, Sport, Medal) %>%
+        count(Country) %>%
+        mutate(Medal_Unique = 1) %>%
+        group_by(Country) %>%
         summarise(Gold = sum(Medal == "Gold"),
                   Silver = sum(Medal == "Silver"),
                   Bronze = sum(Medal == "Bronze")) %>%
-        mutate(Medal_Tally = 3 * Gold + 2 * Silver + Bronze) %>% left_join(GDP, by = c("Country" = "Code")) %>%
-        filter(!is.na(`GDP per Capita`)) %>% arrange(desc(`GDP per Capita`)) %>% mutate(Rank = row_number())
+        mutate(Medal_Tally = 3 * Gold + 2 * Silver + Bronze) %>%
+        left_join(GDP, by = c("Country" = "Code")) %>%
+        filter(!is.na(`GDP per Capita`)) %>%
+        arrange(desc(`GDP per Capita`)) %>%
+        mutate(Rank = row_number())
 
-    india_rank <- plot_df %>% filter(Country == "IND") %>% pull(Rank)
+    india_rank <- plot_df %>%
+        filter(Country == "IND") %>%
+        pull(Rank)
 
-    Filtered_plot <- plot_df %>% filter(Rank >= (india_rank - Range_size) & Rank <= (india_rank + Range_size)) %>%
+    Filtered_plot <- plot_df %>%
+        filter(Rank >= (india_rank - Range_size) & Rank <= (india_rank + Range_size)) %>%
+
         ggplot(aes(x = reorder(Country, `GDP per Capita`), y = Medal_Tally)) +
         geom_segment(aes(x = Country, xend = Country,
                          y = 0, yend = Medal_Tally)) +
@@ -20,8 +32,9 @@ India_Comparison_Plot <- function(data_df, Range_size = 10){
         coord_flip()+
         theme_bw()+
         theme(legend.position = "none") +
-        labs(title = "Medal Tally For Countries With Similar GDP per Capita to India", x = "Medal Score",
-             y = "Countries Ranked by GDP per Capita",
+        labs(title = "Medal Tally For Countries With Similar GDP per Capita to India",
+             x = "Countries Ranked by GDP per Capita",
+             y = "Medal Tally",
              caption = "Note: Points are scaled according to the square root of the population.")
 
     Filtered_plot

@@ -1,5 +1,5 @@
 ---
-title: "Metallica vs Coldplay"
+title: "Metallica vs Coldplay vs Mainstream"
 author: "André le Roux"
 date: "June 2024"
 # date: "`r Sys.Date()`"
@@ -32,13 +32,13 @@ list.files('code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.
 
 \newpage
 
-# Introduction {-}
+# Data {-}
 
+The data used in this report consists of the total discograhy of Metallica and Coldplay that is combined and filtered to only include original studio releases. This is report is also supplemented by data from the Billboard Top 100 and Spotify that is combined to provide the musical features of a portion of the Billboard Top 20 in the given time frame.
 
+# Analysis  {-}
 
-# Data  {-}
-
-
+The first step in the analysis is to show the distribution of song popularity by album for Metallica and Coldplay over time. This is done in the following graph using box plots to demonstrate the distribution and points to represent individual songs. Albums that consist of a singular song are omitted from the figure below.
 
 ```{r, results='hide'}
 
@@ -47,21 +47,28 @@ Musictaste_df <- Inputting_Data(data_root = "data/")
 Filtered_df <- Data_Filtering(Musictaste_df)
 
 ```
-
+##### Figure 1: {-}
 
 ```{r, fig.height = 8, fig.width = 9}
 plot_box <- Plot_Pop_Box(Filtered_df)
 plot_box
 ```
+From _figure 1_ we can see that the average popularity of Coldplay albums tend to be higher than Metallica albums, but the variance in the popularity of songs within albums are also usually higher. A possible conclusion from this is that Metallica has a consistent groups of hardcore fans, which listen to most albums and listen to all the songs on the albums. While Coldplay may have more popular songs, but people don't necessarily listen to all the songs on the album and don't commit to listening to unpopular music, as evidence by the three lower Coldplay albums.
 
+Next I analyse the differences in features of the music created by Coldplay and Metallica. I take the entire discography of the two bands and find the mean across all their songs. This allows for comparing the different styles employed by Coldplay and Metallica. 
 
+##### Figure 2: {-}
 
 ```{r}
 plot_hist <- Plot_Histogram(Filtered_df)
 plot_hist
 ```
 
+From _figure 2_ we conclude that Metallica music tends to have considerably more energy and loudness than Coldplay music, but Coldplay's songs are considerably more acoustic, slightly more popular and has a slightly faster tempo.
 
+For the third figure I include the supplementary data on the musical features of 1,649 songs that have been in the Billboard Top 20 between 1950 and 2020. This allows us to compare the distributions of the musical features of Coldplay and Metallica to those of "mainstream" music.
+
+##### Figure 3: {-}
 
 ```{r}
 #Load supplementary Datasets
@@ -71,4 +78,7 @@ Supp_df <- Preparing_Supplementary(data_root = "data/")
 Comparison_plot <- Comparing_Features(Filtered_df, Supp_df)
 Comparison_plot
 ```
+Firstly, _figure 3_ shows that Coldplay has a more modern discography than Metallica. Secondly it shows that Metallica has lower valence (whether the music is positive) than popular music and that Coldplay has lower valence than Metallica. Metallica is very high energy when compared to Coldplay and popular music, whereas Coldplay is widely distributed. Metallica has longer songs and both have less songs that are good for dancing. 
+
+# Conclusion {-}
 

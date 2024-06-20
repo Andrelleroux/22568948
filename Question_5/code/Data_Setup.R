@@ -11,7 +11,7 @@ Database_Connect <- function(dataroot){
     #gp host= 102.222.21.138
     #gp port= 5010
 
-    conn <- db_connect(db = "psql_datascience")
+    conn <- db_connect(db = "datascience")
     DBI::dbDisconnect(conn)
 
 }

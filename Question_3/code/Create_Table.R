@@ -1,6 +1,6 @@
 Create_Table = function(data){
 
-    pacman::p_load(knitr, kableExtra)
+    pacman::p_load(knitr, kableExtra, tidyverse)
 
     table <- data %>% filter(!is.na(`Share in EU allocations($ billion)`)) %>%
         mutate(Total_Individual_Commitments = `Total bilateral commitments($ billion)`,
@@ -10,9 +10,17 @@ Create_Table = function(data){
                              EU_Allocation = `Share in EU allocations($ billion)`,
                              Total_Allocations = Total_Individual_Allocations + EU_Allocation,
                              Difference = Total_Commitments - Total_Allocations) %>%
-        select(Country, Total_Commitments, Total_Individual_Allocations, Total_Allocations,
+        select(Country, Total_Commitments, Total_Allocations,
                `GDP in 2021($ billion)`, Difference) %>%
-        arrange(desc(Difference)) %>% knitr::kable(caption = "Difference Between Promises and Results") %>%
+        arrange(desc(Difference)) %>%
+        filter(Difference >= 5.5 | Difference <= -1) %>%
+
+        knitr::kable(format = "html",
+                     caption = "Difference Between Promises and Results",
+                     col.names = c("Country", "Commitments",
+                                   "Allocations", "GDP in 2021",
+                                   "Difference")) %>%
+        kable_styling("striped", full_width = F, font_size = 12) %>%
             column_spec(1, bold = T) %>%
             footnote(general = "All numbers are in $ billions",
                      general_title = "Note: ",

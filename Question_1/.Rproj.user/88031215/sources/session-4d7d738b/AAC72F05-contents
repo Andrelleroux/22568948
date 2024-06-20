@@ -3,7 +3,7 @@ Corr_plot <- function(Baby_names_df, no_Years = 3, no_top = 25, conf_level = 0.9
     library(tidyverse)
     library(GGally)
 
-        top_25_names_corr <- Baby_names_df %>% group_by(Year, Name) %>%
+        top_names_corr <- Baby_names_df %>% group_by(Year, Name) %>%
             summarise(Total_Babies = sum(Count)) %>%
             arrange(desc(Total_Babies), .by_group = T) %>%
             group_by(Year) %>%
@@ -11,7 +11,7 @@ Corr_plot <- function(Baby_names_df, no_Years = 3, no_top = 25, conf_level = 0.9
 
         Add_future_plot <- top_25_names_corr %>% rename(Rank_Start = Rank) %>%
             left_join(
-                top_25_names_corr %>%
+                top_names_corr %>%
                     rename(Rank_Later = Rank, Year_Later = Year) %>%
                     mutate(Year = Year_Later - no_Years) %>%
                     select(Name, Year, Rank_Later),
