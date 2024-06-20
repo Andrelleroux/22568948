@@ -9,7 +9,7 @@ Corr_plot <- function(Baby_names_df, no_Years = 3, no_top = 25, conf_level = 0.9
             group_by(Year) %>%
             mutate(Rank = rank(-Total_Babies))
 
-        Add_future_plot <- top_25_names_corr %>% rename(Rank_Start = Rank) %>%
+        Add_future_plot <- top_names_corr %>% rename(Rank_Start = Rank) %>%
             left_join(
                 top_names_corr %>%
                     rename(Rank_Later = Rank, Year_Later = Year) %>%

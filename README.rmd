@@ -24,7 +24,7 @@ It is firstly important that the working directory of the project is properly al
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 #Firstly I create the Texevier project for writing the report and coding in Question 1
-Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_name = "Question_1")
+#Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_name = "Question_1")
 
 #Secondly I fetch the functions that I wrote from the code folder in Question 1
 list.files('Question_1/code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.list() %>% walk(~source(.))
@@ -63,7 +63,7 @@ Then I can group by Year and Name to summarise by count and filter for the top _
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 #Firstly Create the Texevier project
-Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_name = "Question_2")
+#Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_name = "Question_2")
 
 
 ```
@@ -72,7 +72,7 @@ Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_na
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 #Firstly Create the Texevier project
-Texevier::create_template(directory = glue::glue("{getwd()}/"), template_name = "Question_3_1")
+#Texevier::create_template(directory = glue::glue("{getwd()}/"), template_name = "Question_3_1")
 
 
 ```
@@ -81,7 +81,7 @@ Texevier::create_template(directory = glue::glue("{getwd()}/"), template_name = 
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 #Firstly Create the Texevier project
-Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_name = "Question_4")
+#Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_name = "Question_4")
 
 
 ```
@@ -90,7 +90,7 @@ Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_na
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 #Firstly Create the Texevier project
-Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_name = "Question_5")
+#Texevier::create_template_html(directory = glue::glue("{getwd()}/"), template_name = "Question_5")
 
 ```
 
