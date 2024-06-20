@@ -13,7 +13,7 @@ setwd("C:/Users/andre/OneDrive/Documents/Masters_2024_stuff/Data_Science/Data_Sc
 library(tidyverse)
 ```
 
-#Packages
+## Packages
 
 What follows is the list of packages that have been used throughout the
 functions of this project:
@@ -30,7 +30,7 @@ functions of this project:
 -   GGally
 -   dbbasic
 
-#Question 1
+## Question 1
 
 It is firstly important that the working directory of the project is
 properly allocated as the directory is used to create folders and
@@ -106,7 +106,7 @@ the top *no_names* names in each year. I then use the ggridges package
 to plot a density ridge plot for the popularity of the most popular
 names over time. Using alpha = 0.5 to make the graphs more see through.
 
-#Question 2
+## Question 2
 
 This section explains the coding behind question 2 of the exam. The
 following code was used to create the project and to fetch the function
@@ -207,7 +207,7 @@ to plot a violin graph for each Band and popular music, which is then
 facet wrapped with the different musical features. Y scales are set to
 free and alpha is low for interpretability.
 
-#Question 3
+## Question 3
 
 ``` r
 #Firstly Create the Texevier project
@@ -300,7 +300,7 @@ I then arrange by the difference and filter the values so that only the
 extremes on either side shows up. The dataframe is then piped to a kable
 function which turns it into a table.
 
-#Question 4
+## Question 4
 
 ``` r
 #Firstly Create the Texevier project
@@ -428,7 +428,7 @@ countries and draw a line plot with geometric points. I add a vertical
 line at the year 1967 as this is when performance enhancing drugs was
 outlawed.
 
-#Question 5
+## Question 5
 
 ``` r
 #Firstly Create the Texevier project
